@@ -27,6 +27,4 @@ include = ["pytest_plugin*"]
 filterwarnings = ["ignore::pytest.PytestUnknownMarkWarning"]
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=7"
-]
+dev = ["pytest>=7"]

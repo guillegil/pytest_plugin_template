@@ -134,11 +134,11 @@ def pytest_addoption(parser) -> None:
 
 def pytest_configure(config):
     """Register the plugin instance."""
-    config.pluginmanager.register(_plugin_instance, "template-plugin")
-
+    if not hasattr(config, '_plugin_instance'):
+        config.pluginmanager.register(_plugin_instance, "template-plugin")
 
 def pytest_unconfigure(config):
     """Unregister the plugin instance."""
-    plugin = config.pluginmanager.get_plugin("template-plugin")
-    if plugin:
-        config.pluginmanager.unregister(plugin)
+    if config.pluginmanager.has_plugin("template-plugin"):
+        config.pluginmanager.unregister(_plugin_instance, "template-plugin")
+
